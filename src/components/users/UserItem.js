@@ -1,29 +1,19 @@
-import React, { Component } from 'react'
-import Users from './Users'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-class UserItem extends Component {
+//as user is a prop passed here so we need to use prop type, use impt shortcut
+
+const UserItem = ({user: {avatar_url, login, html_url}}) => {  
   
-      // state = {   //we can do this without using constructor in this way
-      // id: 'id',
-      // login: 'mojombo',
-      // avatar_url: 'https://avatars.githubusercontent.com/u/1?v=4',
-      // html_url: 'https://github.com/mojombo'
-    //}
-  
-  //};
-  
+  //destructuring the props here itself, we are fetching data from user prop which is passed
+   
   // here we have hardcoded our data from api.github.com/users, futher we will directly fetch data
-
-
-  render() {
-
-    const {avatar_url, login, html_url} = this.props.user ;
-    
-    // destructuring, instead of state we are using props which we passed and we passed it into user, therefore this.props.user.anything
+  
+  // destructuring, instead of state we are using props which we passed and we passed it into user, therefore this.props.user.anything
     
     return (
       <div className="card text-center">
-        <img src={avatar_url}  // because of destructuring here we do not need to use this.state
+        <img src={avatar_url}  // because of destructuring here we do not need  to use this.state
         alt=""
         className="round-img" 
         style={{ width: '60px' }}
@@ -38,7 +28,15 @@ class UserItem extends Component {
       </div>
 
     )
-  }
+  
 }
+
+UserItem.propTypes = {
+ 
+  //here user (prop which is passed) is an object so
+  //use ptor shortcut for rhs
+  user: PropTypes.object.isRequired
+ 
+};
 
 export default UserItem
