@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
 
 class Search extends Component {
   //whenever we have form in react normally we are going to attach state to the input
@@ -6,13 +8,18 @@ class Search extends Component {
     text: ''
   };
 
+  static propTypes = {
+    searchUsers: PropTypes.func.isRequired
+  }
+
   onChange = (e) => this.setState({ [e.target.name]: e.target.value });
   
   //here we do not hardcode the name of the i/p so this single onchange can work for multiple input names 
 
   onSubmit = (e) => {
     e.preventDefault()
-    console.log(this.state.text)
+    this.props.searchUsers(this.state.text)
+    this.setState({ text: '' })
   }
 
   render() {
